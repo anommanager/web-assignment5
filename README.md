@@ -65,3 +65,6 @@ After adding:
 ## Summary
 
 First, I set up the HTML structure by creating a profile form, an output block and a hobbies section with a list. Then I created the userProfile object and wrote a function that calculates the age and age in months using arithmetic operators.After that, I added event listeners. For the profile form I used the submit event and preventDefault(), so the data is updated without reloading the page. For the hobbies list I wrote a renderHobbies() function that clears the list and rebuilds it from the array, so the page always matches the data in the object.
+
+## GitHub Pages
+<https://anommanager.github.io/web-assignment5/>
