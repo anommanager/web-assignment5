@@ -65,7 +65,7 @@
 
     function renderProfile() {
       const stats = calculateAge();
-      
+
       profileOutput.textContent = `Name: ${userProfile.name}, Age: ${stats.age}, Months: ${stats.ageInMonths}, Hobbies: ${userProfile.hobbies.length}`;
     }
 
@@ -101,14 +101,14 @@
     const addHobbyBtn = document.getElementById("addHobbyBtn");
 
     addHobbyBtn.addEventListener("click", function(event) {
+      const hobby = hobbyInput.value;
+
       if (hobby === "") {
         alert("Please enter a hobby");
         return;
       }
 
       event.preventDefault();
-
-      const hobby = hobbyInput.value;
 
       hobbyInput.value = "";
 
