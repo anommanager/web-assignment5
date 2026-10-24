@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignment 5 JS</title>
+    <style>
+      body {
+        margin: 40px;
+      }
+      .section {
+        margin-bottom: 40px;
+      }
+      .updated {
+        color: green; font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- task 3 -->
+    <form id="signupForm">
+      <label for="usernameInput">Enter your username:</label>
+      <input type="text" id="usernameInput" name="username" required>
+      <br>
+      <label for="birthyearInput">Enter your birth year:</label>
+      <input type="number" id="birthyearInput" name="birthyear" min="1900" max="2100" step="1" value="2000" required>
+      <br>
+      <input type="submit" value="Create / Update Profile">
+    </form>
+
+    <div id="profileOutput" class="section"></div>
+
+    <!-- task 5 -->
+    <form>
+      <input type="text" id="hobbyInput" name="hobby" required>
+      <button id="addHobbyBtn">Add a hobby</button>
+      <button id="removeHobbyBtn">Remove the last hobby</button>
+    </form>
+    <ul id="hobbies">
+    </ul>
+    <script>
+    // task 1
+    const userProfile = {
+      name: "name",
+      birthYear: 1994,
+      isDeveloper: true,
+      hobbies: ["hiking", "diving"]
+    };
+
+    console.log("Profile: ", userProfile);
+
+    // task 2
+    function calculateAge() {
+      const currentYear = new Date().getFullYear();
+      const age = currentYear - userProfile.birthYear;
+      const ageInMonths = age * 12;
+      console.log("Current age: ", age);
+      console.log("Age in months: ", ageInMonths);
+      console.log("Count of hobbies", userProfile.hobbies.length);
+
+      return { age, ageInMonths };
+    }
+
+    const profileOutput = document.getElementById("profileOutput");
+
+    function renderProfile() {
+      const stats = calculateAge();
+      
+      profileOutput.textContent = `Name: ${userProfile.name}, Age: ${stats.age}, Months: ${stats.ageInMonths}, Hobbies: ${userProfile.hobbies.length}`;
+    }
+
+    // task 4
+    const form = document.getElementById("signupForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      userProfile.name = document.getElementById("usernameInput").value;
+      userProfile.birthYear = document.getElementById("birthyearInput").value;
+      console.log("Updated profile: ", userProfile);
+      renderProfile();
+      profileOutput.classList.add("updated");
+    });
+
+    // task 5
+    const hobbyInput = document.getElementById("hobbyInput");
+    const hobbiesList = document.getElementById("hobbies");
+
+    function renderHobbies() {
+      hobbiesList.innerHTML = "";
+
+      userProfile.hobbies.forEach(function(hobby) {
+        const li = document.createElement("li");
+
+        li.textContent = hobby;
+
+        hobbiesList.appendChild(li);
+      });
+    }
+
+    const addHobbyBtn = document.getElementById("addHobbyBtn");
+
+    addHobbyBtn.addEventListener("click", function(event) {
+      if (hobby === "") {
+        alert("Please enter a hobby");
+        return;
+      }
+
+      event.preventDefault();
+
+      const hobby = hobbyInput.value;
+
+      hobbyInput.value = "";
+
+      userProfile.hobbies.push(hobby);
+
+      renderProfile();
+      renderHobbies();
+    });
+
+    const removeHobbyBtn = document.getElementById("removeHobbyBtn");
+
+    removeHobbyBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+
+      userProfile.hobbies.pop();
+
+      renderProfile();
+      renderHobbies();
+    });
+
+    renderProfile();
+    renderHobbies();
+    </script>
+  </body>
+</html>
